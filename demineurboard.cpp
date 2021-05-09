@@ -1,6 +1,4 @@
 #include "headers/DemineurBoard.hpp"
-//#include "headers/Difficulty.hpp"
-//#include "headers/Tile.hpp"
 #include <iostream>
 #include <stack>
 #include <tuple>
@@ -110,20 +108,7 @@ unsigned short DemineurBoard::minesLeft() // 7at flag 3ala wa7da fiha mine
     return Difficulty::getMines() - flags;
 }
 
-/*tuple_list DemineurBoard::neighbours(int i, int j)
-{
-    tuple_list tl;
-    for (int x = -1; x < 2; x++)
-    {
-        for (int y = -1; y < 2; y++)
-        {
-            if (i + x <= getLength() && i + x > 0 && y + j <= getWidth() && y + j > 0)
-            {
-                tl.push_back(tuple<int, int>{i + x, j + y});
-            }
-        }
-    }
-};*/
+
 
 /*void DemineurBoard::Ines(Tile* current) // a utiliser si la case cliqué n est pas une bombe
 {
@@ -218,7 +203,7 @@ unsigned short DemineurBoard::minesLeft() // 7at flag 3ala wa7da fiha mine
     }
 }*/
 /*---------------------------------------------------------------------------------------------------------*/
-void DemineurBoard::decouvrir_carre(int i, int j)
+void DemineurBoard::uncoverZeros(short i, short j)
 {
 	if (!Board[i][j].isPlayed())
 	{
@@ -227,35 +212,35 @@ void DemineurBoard::decouvrir_carre(int i, int j)
                 {
                 if (i > 0)
                 {
-                    decouvrir_carre( i - 1, j);
+                    uncoverZeros( i - 1, j);
                 }
                 if (i > 0 && j > 0)
                 {
-                    decouvrir_carre( i - 1, j - 1);
+                    uncoverZeros( i - 1, j - 1);
                 }
                 if (j > 0)
                 {
-                    decouvrir_carre( i, j - 1);
+                    uncoverZeros( i, j - 1);
                 }
                 if (j > 0 && i < Difficulty::getLength() - 1)
                 {
-                    decouvrir_carre( i + 1, j - 1);
+                    uncoverZeros( i + 1, j - 1);
                 }
                 if (i < Difficulty::getLength() - 1)
                 {
-                    decouvrir_carre( i + 1, j);
+                    uncoverZeros( i + 1, j);
                 }
                 if (i > Difficulty::getLength() - 1 && j < Difficulty::getWidth() - 1)
                 {
-                    decouvrir_carre(i + 1, j + 1);
+                    uncoverZeros(i + 1, j + 1);
                 }
                 if (j < Difficulty::getWidth() - 1)
                 {
-                    decouvrir_carre( i, j + 1);
+                    uncoverZeros( i, j + 1);
                 }
                 if (i > 0 && j < Difficulty::getWidth() - 1)
                 {
-                    decouvrir_carre(i - 1, j + 1);
+                    uncoverZeros(i - 1, j + 1);
                 }
 
 		}
