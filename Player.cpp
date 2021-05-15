@@ -12,7 +12,6 @@ Player::Player (string Name)
     nbrV = 0;
     name= Name;
 
-   cout << "le constructeur est";
 
 }
 
@@ -36,5 +35,9 @@ unsigned short Player::getDef()
 {
     return nbrdef;
 }
+
+string Player::getName(){
+    return name;
+    }
 
 

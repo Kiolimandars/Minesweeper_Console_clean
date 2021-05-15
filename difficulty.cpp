@@ -14,17 +14,17 @@ void Difficulty::easy()
 
 void Difficulty::medium()
 {
-    wid = 15;
+    wid = 12;
     len = 12;
-    nbMine = 50;
+    nbMine = 30;
     time = 60;
 }
 
 void Difficulty::hard()
 {
-    wid = 16;
-    len = 16;
-    nbMine = 56; // 15 a negocier
+    wid = 18;
+    len = 18;
+    nbMine = 181; // 15 a negocier
     time = 120;
 }
 int Difficulty::getWidth()
@@ -49,30 +49,34 @@ unsigned short Difficulty::getTime()
 
 void Difficulty::setLevel()
 {
-    unsigned short choix;
-    cout << "Tapez :" << endl;
-    cout << "1) Niveau easy" << endl;
-    cout << "2) Niveau medium" << endl;
-    cout << "3) Niveau hard" << endl;
-    cin >> choix;
-    switch (choix)
+    char choix;
+    unsigned short ichoix;
+    do{
+        cout << "Choose a level:" << endl;
+        cout << "1) Easy" << endl;
+        cout << "2) Medium" << endl;
+        cout << "3) Hard" << endl;
+        cin >> choix;
+        ichoix=(unsigned short) choix - 48;
+    }while (ichoix<1 || ichoix>3);
+
+    switch (ichoix)
     {
-    case 1:
-    {
-        easy();
-        break;
-    }
-    case 2:
-    {
-        medium();
-        break;
-    }
-    case 3:
-    {
-        hard();
-        break;
-    }
-    default:
-        cout << "try again" << endl;
+        case 1:
+        {
+            easy();
+            break;
+        }
+        case 2:
+        {
+            medium();
+            break;
+        }
+        case 3:
+        {
+            hard();
+            break;
+        }
+
     }
 };

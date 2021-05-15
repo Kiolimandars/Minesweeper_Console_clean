@@ -16,12 +16,22 @@ using namespace std;
     played=false;
     status='e';
 }
-
+/*void Tile::visible()
+{
+    cout<< getNum()<< endl ;
+}*/
 bool Tile::isPlayed(){
 
     return played;
 }
-
+unsigned short Tile::getX()
+{
+    return posRow;
+};
+    unsigned short Tile::getY()
+    {
+        return posCol;
+    };
 bool Tile::isBomb(){
     if(num==9)
     {return true;}

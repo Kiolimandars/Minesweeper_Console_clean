@@ -21,7 +21,7 @@ DemineurBoard::DemineurBoard()
 DemineurBoard::~DemineurBoard() {}
 void DemineurBoard::create()
 {
-    srand(time_t(NULL));
+
     Difficulty::setLevel();
     len = Difficulty::getLength();
     wid = Difficulty::getWidth();
@@ -46,7 +46,7 @@ void DemineurBoard::create()
         }
 
 };
-void DemineurBoard::affiche()
+void DemineurBoard::display()
 {
     HANDLE  hConsole;
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -97,8 +97,8 @@ void DemineurBoard::affiche()
     cout<<'\n';
     }
 };
-//a effacer
-void DemineurBoard::affichei()
+
+void DemineurBoard::displayAll()
 {
     HANDLE  hConsole;
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -140,21 +140,16 @@ void DemineurBoard::affichei()
 
 void DemineurBoard::setMines()
 {
-    unsigned short i,k,j,len,wid;
+    unsigned short i,k=0,j,len,wid;
 
     len = Difficulty::getLength();
     wid = Difficulty::getWidth();
     unsigned short x = Difficulty::getMines();
 
-    while(k<x) //2
+    while(k<x)
     {
-
-
-        i = rand() % len ;
-
-        j = rand() % wid ;
-
-        //cout<<"i= "<<i<<" j= "<<j<<endl;
+        i = rand() % wid ;
+        j = rand() % len ;
         if(!Board[i][j].isBomb()){
             Board[i][j].setBomb();
             k++;
@@ -163,25 +158,12 @@ void DemineurBoard::setMines()
     }
 }
 
-unsigned short DemineurBoard::minesLeft() // 7at flag 3ala wa7da fiha mine
+unsigned short DemineurBoard::minesLeft()
 {
     return Difficulty::getMines() - flags;
 }
 
-/*tuple_list DemineurBoard::neighbours(int i, int j)
-{
-    tuple_list tl;
-    for (int x = -1; x < 2; x++)
-    {
-        for (int y = -1; y < 2; y++)
-        {
-            if (i + x <= getLength() && i + x > 0 && y + j <= getWidth() && y + j > 0)
-            {
-                tl.push_back(tuple<int, int>{i + x, j + y});
-            }
-        }
-    }
-};*/
+
 
 /*void DemineurBoard::Ines(Tile* current) // a utiliser si la case cliqué n est pas une bombe
 {
@@ -276,44 +258,45 @@ unsigned short DemineurBoard::minesLeft() // 7at flag 3ala wa7da fiha mine
     }
 }*/
 /*---------------------------------------------------------------------------------------------------------*/
-void DemineurBoard::decouvrir_carre(int i, int j)
+void DemineurBoard::uncoverTile(int i, int j)
 {
 	if (!Board[i][j].isPlayed())
 	{
 	    Board[i][j].setPlayed();
+	    nbPlayed++;
 	    if (Board[i][j].getNum() == 0)
                 {
                 if (i > 0)
                 {
-                    decouvrir_carre( i - 1, j);
+                    uncoverTile( i - 1, j);
                 }
                 if (i > 0 && j > 0)
                 {
-                    decouvrir_carre( i - 1, j - 1);
+                    uncoverTile( i - 1, j - 1);
                 }
                 if (j > 0)
                 {
-                    decouvrir_carre( i, j - 1);
+                    uncoverTile( i, j - 1);
                 }
                 if (j > 0 && i < Difficulty::getLength() - 1)
                 {
-                    decouvrir_carre( i + 1, j - 1);
+                    uncoverTile( i + 1, j - 1);
                 }
                 if (i < Difficulty::getLength() - 1)
                 {
-                    decouvrir_carre( i + 1, j);
+                    uncoverTile( i + 1, j);
                 }
                 if (i > Difficulty::getLength() - 1 && j < Difficulty::getWidth() - 1)
                 {
-                    decouvrir_carre(i + 1, j + 1);
+                    uncoverTile(i + 1, j + 1);
                 }
                 if (j < Difficulty::getWidth() - 1)
                 {
-                    decouvrir_carre( i, j + 1);
+                    uncoverTile( i, j + 1);
                 }
                 if (i > 0 && j < Difficulty::getWidth() - 1)
                 {
-                    decouvrir_carre(i - 1, j + 1);
+                    uncoverTile(i - 1, j + 1);
                 }
 
 		}
@@ -326,18 +309,13 @@ void DemineurBoard::setNum(Tile* current)
     fflush(stdin);
     coupleList l;
     l = (*current).neighbours();
-    //cout<<"longueur: "<<l.size()<<endl;
     for (coupleList::iterator it = l.begin(); it != l.end(); ++it)
     {
-        //cout<<"for{"<<(*it).first<<','<<(*it).second<<"}"<<endl;
         if ((*it).first < Difficulty::getLength() && (*it).second < Difficulty::getWidth())
         {
-            //cout<<"if1:{"<<(*it).first<<','<<(*it).second<<'}'<<endl;
             if (Board[(*it).first][(*it).second].isBomb())
             {
-                //cout<<"if2:{"<<(*it).first<<','<<(*it).second<<'}'<<endl;
                 res++;
-                //cout<<"res: "<<res<<endl;
             }
         }
     }
@@ -349,3 +327,27 @@ Tile* DemineurBoard::operator [](int i){
 
 }
 
+void DemineurBoard::setFlags(short f){
+        flags+=f;
+}
+
+
+void DemineurBoard::addNbPlayed(){
+    nbPlayed++;
+}
+
+unsigned short DemineurBoard::getNbPlayed(){
+    return nbPlayed;
+}
+
+bool DemineurBoard::checkVectory(){
+
+    for (unsigned short i=0;i<Difficulty::getLength();i++){
+            for (unsigned short j=0;j<Difficulty::getLength();j++){
+                if (Board[i][j].getStatus()=='f' && !Board[i][j].isBomb())
+                    return false;
+            }
+
+    }
+    return true;
+}
