@@ -8,7 +8,7 @@ void Difficulty::easy()
 {
     wid = 8;
     len = 8;
-    nbMine = 16; // nbMine= {(wid*len) / 4}
+    nbMine = 8; // nbMine= {(wid*len) / 4}
     time = 30;
 }
 
@@ -24,7 +24,7 @@ void Difficulty::hard()
 {
     wid = 18;
     len = 18;
-    nbMine = 181; // 15 a negocier
+    nbMine = 140; // 15 a negocier
     time = 120;
 }
 int Difficulty::getWidth()

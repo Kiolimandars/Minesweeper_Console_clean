@@ -5,25 +5,25 @@
 
 using namespace std;
 
-Player::Player (string Name)
+Player::Player ()
 
 {
     nbrdef = 0;
     nbrV = 0;
-    name= Name;
+    name= "";
 
 
 }
 
 Player::~Player() {}
 
-void Player::setV() // the game is over
+void Player::setV(unsigned short n)
 {
-        nbrV++;
+        nbrV=n;
 }
-void Player::setDef()
+void Player::setDef(unsigned short n)
 {
-        nbrdef++;
+        nbrdef=n;
 }
 
 unsigned short Player::getV()
@@ -39,5 +39,7 @@ unsigned short Player::getDef()
 string Player::getName(){
     return name;
     }
-
+void Player::setName(string Name){
+    name=Name;
+}
 
