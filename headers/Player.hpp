@@ -13,13 +13,16 @@ class Player
 
     public:
      //si le Player est un visiteur, appel à un constructeur par défaut.
-    Player(string);
+    Player();
     ~Player();
-   unsigned short getV(); //revoie le nombre de victoire
-   unsigned short getDef(); //revoie le nombre d'echec
+    //getters
+   unsigned short getV();
+   unsigned short getDef();
    string getName();
-   void setV(); //incrémenter le nombre de victoire
-   void setDef(); //incrémenter le nombre d'echec
+   //setters
+   void setV(unsigned short);
+   void setDef(unsigned short);
+   void setName(string);
 
 
 };
