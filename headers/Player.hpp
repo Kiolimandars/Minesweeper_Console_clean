@@ -12,7 +12,6 @@ class Player
    unsigned short nbrdef;
 
     public:
-     //si le Player est un visiteur, appel à un constructeur par défaut.
     Player();
     ~Player();
     //getters

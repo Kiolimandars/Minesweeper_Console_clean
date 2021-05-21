@@ -49,8 +49,8 @@ int main()
 
 
     B.create();
-    B.displayAll();
-    cout<<"\t\t-------------------------------------------------------------------------------"<<endl;
+    //B.displayAll();
+    //cout<<"\t\t-------------------------------------------------------------------------------"<<endl;
 
     B.display();
     cout<<"\nPlayer: "<<p.getName();
@@ -130,70 +130,3 @@ int main()
         setScores(vPlayers);
 return 0;
 }
-
-/*int main()
-{
-        string line;
-        ifstream rtest ;
-        ofstream wtest ("Test.txt");
-        vector <string> vLine;
-
-
-        if (wtest.is_open()){
-            wtest<<"This is line: 0"<<"\n";
-            for (int i=1;i<12;i++){
-                wtest<<"This is line: "<<i<<"\n";
-                //cout<<"This is line: "<<i<<"\n";
-            }
-            wtest.close();
-        }
-        else{
-            cout<<"rfile couldnt be opened"<<endl;
-        }
-        rtest.open("Test.txt");
-        while (getline(rtest,line)){
-                cout<<line<<endl;
-                vLine.push_back(line);
-            }
-        rtest.close();
-        wtest.open("Test.txt");
-
-        if (wtest.is_open()){
-
-
-            for (int i=0; i < vLine.size(); i++){
-                    line=vLine[i];
-                    cout<<line<<endl;
-                    if(line[line.find("is ")+12]=='4'){
-                        cout<<"found it"<<endl;
-                        line="This is the deleted line";
-
-                    }
-                    wtest<<line<<'\n';
-                }
-            }
-            else{
-            cout<<"rfile couldnt be opened"<<endl;
-            }
-
-    return 0;
-}*/
-
-/*int main(){
-
-    vector<Player> vPlayers;
-    vectorPLayers(&vPlayers);
-
-    for (int i=0; i<vPlayers.size(); i++){
-        cout<<vPlayers[i].getName()<<" "<<vPlayers[i].getV()<<" "<<vPlayers[i].getDef()<<endl;
-    }
-    Player p;
-    p.setName("NewName");
-    p.setV(6);
-    p.setDef(10);
-    vPlayers.push_back(p);
-    setScores(vPlayers);
-
-    return 0;
-}
-*/
